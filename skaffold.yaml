@@ -1,0 +1,42 @@
+apiVersion: skaffold/v2beta3
+kind: Config
+metadata:
+  name: my-k-s-react-express-mongo
+build:
+  artifacts:
+  - image: shol/client
+    context: client
+    docker:
+      dockerfile: Dockerfile.dev
+    sync:
+      infer:
+        - '**/*.js'
+        - '**/*.json'
+        - '**/*.css'
+  - image: shol/server
+    context: server
+    docker:
+      dockerfile: Dockerfile.dev
+    sync:
+      infer:
+        - '**/*.js'
+        - '**/*.json'
+deploy:
+  kubectl:
+    manifests:
+    - k8s/client-cluster-ip-service.yml
+    - k8s/client-deployment.yml
+    - k8s/database-persistent-volume-claim.yml
+    - k8s/ingress-service.yml
+    - k8s/mongo-cluster-ip-service.yml
+    - k8s/mongo-deployment.yml
+    - k8s/server-cluster-ip-service.yml
+    - k8s/server-deployment.yml
+profiles:
+- name: prod
+  build:
+    artifacts:
+    - image: shol/client
+      context: client
+    - image: shol/server
+      context: server
