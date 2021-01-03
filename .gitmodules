@@ -1,0 +1,6 @@
+[submodule "client"]
+	path = client
+	url = git@gitlab.com:music-school/client-react-ts.git
+[submodule "server"]
+	path = server
+	url = git@gitlab.com:music-school/server-node-express.git
