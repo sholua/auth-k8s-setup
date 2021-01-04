@@ -25,7 +25,6 @@ spec:
           volumeMounts:
             - name: mongo-storage 
               mountPath: /data/db
-              subPath: data
           env:
             - name: MONGO_USERNAME
               valueFrom:

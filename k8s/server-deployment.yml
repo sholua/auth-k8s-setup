@@ -12,9 +12,15 @@ spec:
       labels:
         component: server 
     spec:
+      restartPolicy: Always
+      initContainers:
+        - name: wait-for-init-db
+          image: busybox
+          command: ['sh', '-c', 'until nc -z
+          mongo-cluster-ip-service:27017; do echo waiting for db; sleep 2; done;']
       containers: 
         - name: server 
-          image: shol/server 
+          image: shol/music-school-server 
           imagePullPolicy: Never
           ports:
             - containerPort: 5000
@@ -24,7 +30,7 @@ spec:
             - name: MONGO_PORT
               value: '27017'
             - name: MONGO_DB
-              value: mschool
+              value: music-school
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -35,3 +41,8 @@ spec:
                 secretKeyRef:
                   name: mongo-password
                   key: MONGO_PASSWORD
+            - name: music_school_jwtPrivateKey
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-private-key
+                  key: JWT_PRIVATE_KEY

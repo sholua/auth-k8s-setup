@@ -4,7 +4,7 @@ metadata:
   name: my-k-s-react-express-mongo
 build:
   artifacts:
-  - image: shol/client
+  - image: shol/music-school-client
     context: client
     docker:
       dockerfile: Dockerfile.dev
@@ -13,7 +13,7 @@ build:
         - '**/*.js'
         - '**/*.json'
         - '**/*.css'
-  - image: shol/server
+  - image: shol/music-school-server
     context: server
     docker:
       dockerfile: Dockerfile.dev
@@ -36,7 +36,7 @@ profiles:
 - name: prod
   build:
     artifacts:
-    - image: shol/client
+    - image: shol/music-school-client
       context: client
-    - image: shol/server
+    - image: shol/music-school-server
       context: server
