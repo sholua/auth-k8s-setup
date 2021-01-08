@@ -1,7 +1,7 @@
 apiVersion: skaffold/v2beta3
 kind: Config
 metadata:
-  name: my-k-s-react-express-mongo
+  name: music-school
 build:
   artifacts:
   - image: shol/music-school-client

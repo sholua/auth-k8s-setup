@@ -29,6 +29,16 @@ kubectl port-forward <mongo_pod_id> 27017:27017
 kubectl patch pv database-persistent-volume -p '{"spec":{"claimRef": null}}'
 ```
 
+## MongoDB dump
+
+```
+kubectl get pods                // get <mongo_pod_id>
+kubect exec -it <mongo_pod_id> -- sh
+mongodump --out music-school_dump --db music-school
+exit                            // exit from mongo shell
+kubectl cp <mongo_pod_id>:music-school_dump ~/Documents/music-school_dump
+```
+
 ## For production buid run:
 
 ```bash
