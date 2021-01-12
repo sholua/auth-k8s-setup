@@ -41,8 +41,13 @@ spec:
                 secretKeyRef:
                   name: mongo-password
                   key: MONGO_PASSWORD
-            - name: music_school_jwtPrivateKey
+            - name: musicSchool_accessTokenSecret
               valueFrom:
                 secretKeyRef:
-                  name: jwt-private-key
-                  key: JWT_PRIVATE_KEY
+                  name: access-token-secret
+                  key: ACCESS_TOKEN_SECRET
+            - name: musicSchool_refreshTokenSecret
+              valueFrom:
+                secretKeyRef:
+                  name: refresh-token-secret
+                  key: REFRESH_TOKEN_SECRET
