@@ -29,6 +29,19 @@ kubectl port-forward <mongo_pod_id> 27017:27017
 kubectl patch pv database-persistent-volume -p '{"spec":{"claimRef": null}}'
 ```
 
+## Installing npm package into kubetnetes pod:
+
+(During development process)
+
+Navigate into client or server folder on host system and install the package locally. Skaffold will sync only package.json and package-lock.json files (Local folder "node_modules" is ignored by git and docker). Then go to running pod and install npm packate in its file system:
+
+```bash
+kubectl get pods            // get <pod_id>
+kubectl exec -it <pod_id> -- sh
+npm install
+exit
+```
+
 ## MongoDB dump
 
 ```
