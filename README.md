@@ -13,6 +13,7 @@ Run app in Kubernetes cluster with minikube:
     kubectl create secret generic mongo-password --from-literal MONGO_PASSWORD=12345678
     kubectl create secret generic access-token-secret --from-literal ACCESS_TOKEN_SECRET=yourSecretKey
     kubectl create secret generic refresh-token-secret --from-literal REFRESH_TOKEN_SECRET=yourSecretKey
+    kubectl create secret generic email-password --from-literal EMAIL_PASSWORD=yourEmailPassword
     kubectl apply -f k8s/database-persistent-volume.yml
     skaffold dev --port-forward
     minikube ip

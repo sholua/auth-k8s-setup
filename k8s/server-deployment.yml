@@ -51,3 +51,8 @@ spec:
                 secretKeyRef:
                   name: refresh-token-secret
                   key: REFRESH_TOKEN_SECRET
+            - name: musicSchool_emailPassword
+              valueFrom:
+                secretKeyRef:
+                  name: email-password
+                  key: EMAIL_PASSWORD
