@@ -35,14 +35,11 @@ kubectl patch pv database-persistent-volume -p '{"spec":{"claimRef": null}}'
 
 (During development process)
 
-Navigate into client or server folder on host system and install the package locally. Skaffold will sync only package.json and package-lock.json files (Local folder "node_modules" is ignored by git and docker). Then go to running pod and install npm packate in its file system:
+- Stop Skaffold;
+- Navigate into client or server folder on host system and install the package locally;
+- Start Skaffold.
 
-```bash
-kubectl get pods            // get <pod_id>
-kubectl exec -it <pod_id> -- sh
-npm install
-exit
-```
+Local folder "node_modules" is ignored by git and docker.
 
 ## MongoDB dump
 
