@@ -10,6 +10,8 @@ build:
       dockerfile: Dockerfile.dev
     sync:
       infer:
+        - '**/*.tsx'
+        - '**/*.jsx'
         - '**/*.js'
         - '**/*.json'
         - '**/*.css'
