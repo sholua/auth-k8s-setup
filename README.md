@@ -17,6 +17,7 @@ Run app in Kubernetes cluster with minikube:
     kubectl apply -f k8s/database-persistent-volume.yml
     skaffold dev --port-forward
     minikube ip
+    echo "$(minikube ip) music-school.me" | sudo tee -a /etc/hosts
 ```
 
 ## Port forward
