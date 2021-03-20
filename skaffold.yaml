@@ -30,6 +30,7 @@ deploy:
     - k8s/client-cluster-ip-service.yml
     - k8s/client-deployment.yml
     - k8s/database-persistent-volume-claim.yml
+    - k8s/files-persistent-volume-claim.yml
     - k8s/ingress-service.yml
     - k8s/mongo-cluster-ip-service.yml
     - k8s/mongo-deployment.yml

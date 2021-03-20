@@ -18,12 +18,19 @@ spec:
           image: busybox
           command: ['sh', '-c', 'until nc -z
           mongo-cluster-ip-service:27017; do echo waiting for db; sleep 2; done;']
+      volumes:
+        - name: server-storage
+          persistentVolumeClaim:
+            claimName: files-persistent-volume-claim
       containers: 
         - name: server 
           image: shol/music-school-server 
           imagePullPolicy: Never
           ports:
             - containerPort: 5000
+          volumeMounts:
+            - name: server-storage 
+              mountPath: /app/uploads
           env:
             - name: MONGO_HOSTNAME
               value: mongo-cluster-ip-service

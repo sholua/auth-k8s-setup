@@ -15,6 +15,7 @@ Run app in Kubernetes cluster with minikube:
     kubectl create secret generic refresh-token-secret --from-literal REFRESH_TOKEN_SECRET=yourSecretKey
     kubectl create secret generic email-password --from-literal EMAIL_PASSWORD=yourEmailPassword
     kubectl apply -f k8s/database-persistent-volume.yml
+    kubectl apply -f k8s/files-persistent-volume.yml
     skaffold dev --port-forward
     minikube ip
     echo "$(minikube ip) music-school.me" | sudo tee -a /etc/hosts
@@ -29,7 +30,7 @@ kubectl port-forward <mongo_pod_id> 27017:27017
 ## Restore access to an existing pv:
 
 ```bash
-kubectl patch pv database-persistent-volume -p '{"spec":{"claimRef": null}}'
+kubectl patch pv database-persistent-volume -p '{"spec":{"claimRef": null}}' && kubectl patch pv files-persistent-volume -p '{"spec":{"claimRef": null}}'
 ```
 
 ## Installing npm package into kubetnetes pod:
@@ -44,12 +45,18 @@ Local folder "node_modules" is ignored by git and docker.
 
 ## MongoDB dump
 
-```
+```bash
 kubectl get pods                // get <mongo_pod_id>
-kubect exec -it <mongo_pod_id> -- sh
+kubectl exec -it <mongo_pod_id> -- sh
 mongodump --out music-school_dump --db music-school
 exit                            // exit from mongo shell
 kubectl cp <mongo_pod_id>:music-school_dump ~/Documents/music-school_dump
+```
+
+## Copy uploaded files from persistent server storage
+
+```bash
+kubectl cp <server_pod_id>:/app/uploads ~/Documents/minikubeUploads
 ```
 
 ## For production buid run:
