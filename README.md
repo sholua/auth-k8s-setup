@@ -69,3 +69,4 @@ skaffold run -p prod
 
 **frontend** minikube_ip
 **backend** minikube_ip/api/
+**api-documentation** localhost:5000/api-docs
